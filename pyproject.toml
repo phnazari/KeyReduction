@@ -5,6 +5,10 @@ description = "This library accompanies the paper 'The Key to State Reduction in
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "accelerate==1.12.0",
+    "einops==0.7.0",
+    "scipy==1.15.3",
+    "tensorboard==2.20.0",
     "tokenizers==0.22.0",
     "torch==2.9.1",
     "torchdata==0.11.0",
@@ -12,6 +16,7 @@ dependencies = [
     "tqdm==4.67.1",
     "transformers==4.57.3",
     "triton==3.5.1",
+    "tyro==1.0.1",
     "wandb==0.16.2",
 ]
 

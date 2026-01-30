@@ -17,7 +17,8 @@ from torch.distributed.checkpoint.stateful import Stateful
 from torchdata.stateful_dataloader import StatefulDataLoader
 from transformers import PreTrainedTokenizer
 
-from torchtitan.tools import utils
+# from torchtitan.tools import utils
+from torchtitan.tools.utils import Color
 from torchtitan.tools.logging import logger
 
 
@@ -554,7 +555,7 @@ def build_dataset(
     num_workers: int = 32,
     seed: Optional[int] = None,
 ) -> IterableDataset:
-    color = utils.Color
+    color = Color
     min_num_shards = dp_degree * num_workers if dp_degree else None
     if len(dataset.split(',')) == 1:
         dataset = load_dataset(
