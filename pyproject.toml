@@ -1,7 +1,19 @@
 [project]
 name = "keyreduction"
 version = "0.1.0"
-description = "Add your description here"
+description = "This library accompanies the paper 'The Key to State Reduction in Linear Attention: A Rank-based Perspective'"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "tokenizers==0.22.0",
+    "torch==2.9.1",
+    "torchdata==0.11.0",
+    "torchtitan",
+    "tqdm==4.67.1",
+    "transformers==4.57.3",
+    "triton==3.5.1",
+    "wandb==0.16.2",
+]
+
+[tool.uv.sources]
+torchtitan = { git = "https://github.com/pytorch/torchtitan.git", rev = "0b44d4c437c424b6bf719661c0eb4283dc4068bc" }
