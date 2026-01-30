@@ -7,6 +7,8 @@ requires-python = ">=3.10"
 dependencies = [
     "accelerate==1.12.0",
     "einops==0.7.0",
+    "flame",
+    "flash-linear-attention",
     "scipy==1.15.3",
     "tensorboard==2.20.0",
     "tokenizers==0.22.0",
@@ -22,3 +24,11 @@ dependencies = [
 
 [tool.uv.sources]
 torchtitan = { git = "https://github.com/pytorch/torchtitan.git", rev = "0b44d4c437c424b6bf719661c0eb4283dc4068bc" }
+flash-linear-attention = { workspace = true, editable = true }
+flame = { workspace = true, editable = true }
+
+[tool.uv.workspace]
+members = [
+    "flash-linear-attention",
+    "flame",
+]

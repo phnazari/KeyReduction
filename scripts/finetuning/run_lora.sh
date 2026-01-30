@@ -38,7 +38,7 @@ else
     fi
     
     COMPRESSED_CHECKPOINT="${BASE_DUMP_DIR}/${MODEL_NAME}/${PARAMS}/${TOKENS}/checkpoints/${METHOD}_compressed_${RANK}/step-0"
-    FINETUNED_OUTPUT_DIR="${BASE_DUMP_DIR}/${MODEL_NAME}/${PARAMS}/${TOKENS}/checkpoints/long_${METHOD}_finetuned_${RANK}"
+    FINETUNED_OUTPUT_DIR="${BASE_DUMP_DIR}/${MODEL_NAME}/${PARAMS}/${TOKENS}/checkpoints/${METHOD}_finetuned_${RANK}"
 fi
 
 # Automatic Teacher determination (if not explicitly provided)
@@ -109,9 +109,9 @@ NNODE=$NNODE NGPU=$NGPU LOG_RANK=$LOG_RANK bash "$REPO_ROOT/flame/train.sh" \
   --lr_scheduler.warmup_steps 100 \
   --lr_scheduler.lr_min 0.1 \
   --lr_scheduler.decay_type cosine \
-  --training.batch_size 4 \
-  --training.seq_len 8192 \
-  --training.context_len 8192 \
+  --training.batch_size 16 \
+  --training.seq_len 2048 \
+  --training.context_len 2048 \
   --training.gradient_accumulation_steps 1 \
   --training.max_norm 1.0 \
   --training.skip_nan_inf \
