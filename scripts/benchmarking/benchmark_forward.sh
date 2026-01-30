@@ -55,12 +55,11 @@ COMPRESSED_RESULTS=$(mktemp)
 
 # Benchmark initial model
 echo "Step 1/2: Benchmarking initial model..."
-python benchmarks/benchmark_forward.py \
+python "$REPO_ROOT/flame/benchmarks/benchmark_forward.py" \
   --model "$INITIAL_MODEL" \
   --name "Initial" \
   --batch_size "$BATCH_SIZE" \
   --seq_len "$SEQ_LEN" \
-  --warmup_steps "$WARMUP_STEPS" \
   --steps "$BENCHMARK_STEPS" \
   --dtype "$DTYPE" | tee "$INITIAL_RESULTS"
 
@@ -74,12 +73,11 @@ fi
 # Benchmark compressed model
 echo ""
 echo "Step 2/2: Benchmarking compressed model..."
-python benchmarks/benchmark_forward.py \
+python "$REPO_ROOT/flame/benchmarks/benchmark_forward.py" \
   --model "$COMPRESSED_MODEL" \
   --name "Compressed" \
   --batch_size "$BATCH_SIZE" \
   --seq_len "$SEQ_LEN" \
-  --warmup_steps "$WARMUP_STEPS" \
   --steps "$BENCHMARK_STEPS" \
   --dtype "$DTYPE" | tee "$COMPRESSED_RESULTS"
 
