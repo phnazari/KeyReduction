@@ -84,7 +84,7 @@ def find_models(search_dir, model_prefix, method):
         return f"{model_prefix}_{os.path.basename(path)}"
 
     # 1. Find compressed_* directories
-    for p in glob.glob(os.path.join(search_dir, f"{method}_compressed_*trashhh")):
+    for p in glob.glob(os.path.join(search_dir, f"{method}_compressed_*")):
         if os.path.isdir(p) and os.path.exists(os.path.join(p, "config.json")):
             models.append({
                 "name": get_name(p),

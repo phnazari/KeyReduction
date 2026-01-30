@@ -15,37 +15,24 @@ set -e
 # Configuration
 # ============================================================================
 
-MODEL_NAME=${1:-"delta_net"}
-PARAMS=${2:-"340m"}
-METHOD=${3:-"l1"}
+# Usage: bash scripts/eval/eval_batch_parallel.sh <CHECKPOINT_BASE_DIR> [OUTPUT_DIR]
 
-if [[ "$PARAMS" == "340m" ]]; then
-    TOKENS="10BT"
-else
-    TOKENS="100BT"
+COMPRESSED_BASE=$1
+if [[ -z "$COMPRESSED_BASE" ]]; then
+    echo "Usage: bash $0 <CHECKPOINT_BASE_DIR> [OUTPUT_DIR]"
+    echo "Example: bash $0 ./exp/checkpoints"
+    exit 1
 fi
 
-# Define short names for models
-case "${MODEL_NAME}" in
-    "delta_net")
-        MODEL_NAME_SHORT="dn"
-        ;;
-    "gated_delta_net")
-        MODEL_NAME_SHORT="gdn"
-        ;;
-    *)
-        MODEL_NAME_SHORT="${MODEL_NAME}" 
-        ;;
-esac
+# Resolve absolute path for COMPRESSED_BASE
+COMPRESSED_BASE=$(cd "$COMPRESSED_BASE" && pwd)
+
+# Default output directory inside the checkpoint base
+OUTPUT_BASE_DIR=${2:-"${COMPRESSED_BASE}/eval_results"}
+METHOD=${METHOD:-"all"}
+MODEL_NAME=${MODEL_NAME:-"none"}
 
 TOKENIZER_PATH="fla-hub/transformer-1.3B-100B"
-
-# Logic-based default paths with override support
-DEFAULT_OUTPUT_BASE="/fast/pnazari/flame/dump/eval_drrqr/eval_${MODEL_NAME_SHORT}_${PARAMS}"
-OUTPUT_BASE_DIR=${OUTPUT_BASE_DIR:-$DEFAULT_OUTPUT_BASE}
-
-DEFAULT_COMPRESSED_BASE="/fast/pnazari/flame/dump/${MODEL_NAME}/${PARAMS}/${TOKENS}/checkpoints"
-COMPRESSED_BASE=${4:-${COMPRESSED_BASE:-$DEFAULT_COMPRESSED_BASE}}
 
 BATCH_SIZE=8
 MAX_LENGTH="10000"
@@ -58,7 +45,7 @@ echo "Parallel Evaluation via Ray"
 echo "=========================================="
 echo "Root:             $REPO_ROOT"
 echo "Searching in:     $COMPRESSED_BASE"
-echo "Model Prefix:     $MODEL_NAME"
+echo "Output to:        $OUTPUT_BASE_DIR"
 echo "=========================================="
 
 python -u "$REPO_ROOT/scripts/eval/eval_batch_parallel.py" \

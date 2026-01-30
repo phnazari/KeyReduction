@@ -42,12 +42,11 @@ bash scripts/finetuning/run_lora.sh ./exp/pruned_rrqr ./exp/finetuned_rrqr
 ```
 
 ### 4. Evaluation with Multi-Evaluator
-To evaluate your models (initial, pruned, and finetuned) across multiple benchmarks in parallel:
+To evaluate your models (initial, pruned, and finetuned) across multiple benchmarks in parallel. This script automatically discovers all compressed and finetuned models in the provided directory.
 
 ```bash
-# Evaluate a directory of checkpoints
-COMPRESSED_BASE="./exp/checkpoints" \
-bash scripts/eval/eval_batch_parallel.sh gated_delta_net 340m rrqr
+# Evaluate all checkpoints in a folder
+bash scripts/eval/eval_batch_parallel.sh ./exp/checkpoints
 ```
 
 ### 5. Benchmarking Performance
