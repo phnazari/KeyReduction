@@ -36,7 +36,7 @@ echo "=========================================="
 
 # Step 1: Apply Pruning
 echo "Step 1: Running random pruning (data-free)..."
-python "$REPO_ROOT/src/key_reduction/pruners/random.py" \
+python "$REPO_ROOT/src/key_reduction/pruners/rand.py" \
     --model_path "$BASE_MODEL_DIR" \
     --output_dir "$OUTPUT_DIR" \
     --pruning_ratio "$PRUNING_RATIO" \
