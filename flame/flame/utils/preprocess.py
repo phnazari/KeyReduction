@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 
 from transformers import AutoTokenizer, PreTrainedTokenizer
 
-from flame.flame.data import build_dataset
+from flame.data import build_dataset
 from torchtitan.tools.logging import init_logger, logger
 
 

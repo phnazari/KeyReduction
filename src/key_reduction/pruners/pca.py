@@ -33,7 +33,7 @@ from fla.modules import ShortConvolution
 from fla.modules.l2norm import l2_norm
 import custom_models.delta_net_2 # noqa
 
-from flame.flame.data import build_dataloader, build_dataset
+from flame.data import build_dataloader, build_dataset
 
 # ==============================================================================
 # PCA UTILITY FUNCTIONS (Adapted from legacy compression_utils.py)

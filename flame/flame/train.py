@@ -48,7 +48,7 @@ from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
 import custom_models
 from flame.components.checkpoint import TrainState
 from flame.config_manager import JobConfig
-from flame.flame.data import build_dataloader, build_dataset
+from flame.data import build_dataloader, build_dataset
 from flame.flame.models.parallelize_fla import parallelize_fla
 from flame.flame.models.pipeline_fla import pipeline_fla
 from flame.flame.tools.utils import get_nparams_and_flops

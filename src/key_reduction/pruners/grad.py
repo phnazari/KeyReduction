@@ -34,7 +34,7 @@ from einops import rearrange
 
 import fla # noqa
 import custom_models.delta_net_2 # noqa
-from flame.flame.data import build_dataloader, build_dataset
+from flame.data import build_dataloader, build_dataset
 
 # Import flash-linear-attention modules
 import fla # noqa
@@ -42,7 +42,7 @@ from fla.modules import ShortConvolution
 import custom_models.delta_net_2 # noqa
 
 # Import flame utilities
-from flame.flame.data import build_dataloader, build_dataset
+from flame.data import build_dataloader, build_dataset
 
 def get_deltanet(model_path):
     print(f"Loading model from {model_path}...")
