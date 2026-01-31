@@ -1,6 +1,20 @@
 # KeyReduction: Structural Pruning for DeltaNet
+This is the repository for the paper [The Key to State Reduction in Linear Attention: A Rank-based Perspective](google.com).
 
-This repository provides an end-to-end pipeline for training, compressing, and evaluating **DeltaNet** and **GatedDeltaNet** models. We focus on structural Q/K dimension reduction to improve efficiency while maintaining performance.
+It allows for structured Q/K dimension reduction of DeltaNet and Gated DeltaNet models to improve efficiency while maintaining performance.
+
+## Installation
+First, clone this repository:
+```bash
+git clone git@github.com:phnazari/KeyReduction.git
+```
+Next, install the dependencies vua `uv`:
+```bash
+uv venv --python=3.10
+source .venv/bin/activate
+uv sync
+```
+Now, you are ready to go!
 
 ## 🚀 Quick Start
 
@@ -9,28 +23,20 @@ To train a model from scratch or continue training, use the pre-configured scrip
 
 ```bash
 # Example: Training a 340M DeltaNet on 10BT of fineweb-edu
-# This script uses the flame submodule and optimized configurations
 bash flame/flame/scripts/deltanet_340m.sh
 ```
 
 ### 2. Pruning a Model
 We provide several structural pruning methods. You can prune either a local checkpoint or a model directly from the Hugging Face Hub.
 
-#### Example: Strong RRQR (drrqr)
+#### Example: Deep RRQR (drrqr)
 This method uses activations to identify which head dimensions are redundant.
 
 ```bash
-# Pruning a local checkpoint
-BASE_MODEL_DIR="./exp/gated-deltanet-340M/hf_checkpoint" \
+BASE_MODEL_DIR="fla-hub/delta_net-1.3B-100B" \
 OUTPUT_DIR="./exp/pruned_rrqr" \
 PRUNING_RATIO=0.5 \
 bash scripts/run_pruning/run_rrqr.sh
-
-# Pruning from Hugging Face Hub
-BASE_MODEL_DIR="m-a-p/1.3B-100B-GatedDeltaNet-pure" \
-OUTPUT_DIR="./exp/pruned_wanda" \
-PRUNING_RATIO=0.25 \
-bash scripts/run_pruning/run_wanda.sh
 ```
 
 ### 3. LoRA Finetuning
@@ -70,23 +76,10 @@ This script generates:
 - **Rank Lists**: Per-head rank utilization tensors saved in `.pt` format.
 - **Visualizations**: Combined plots showing rank evolution across layers.
 
-## 🛠️ Installation & Setup
-
-```bash
-# 1. Clone with submodules
-git clone --recursive https://github.com/phnazari/KeyReduction.git
-cd KeyReduction
-
-# 2. Setup environment
-pip install -e .
-pip install -e ./flash-linear-attention
-pip install -e ./flame
+# Citation
+If you find this repository helpful, please cite our work:
+```
+to fill in
 ```
 
-## 📁 Repository Structure
-- `src/key_reduction/`: Core pruning logic and algorithms.
-- `scripts/run_pruning/`: Individual pipelines for RRQR, Wanda, Grad, L1, etc.
-- `scripts/multi_run/`: Utilities for sweeping across multiple pruning ratios.
-- `scripts/eval/`: Parallel evaluation and table generation.
-- `scripts/benchmarking/`: Throughput and speedup verification.
-- `flame/`: Training framework and base model implementations.
+
